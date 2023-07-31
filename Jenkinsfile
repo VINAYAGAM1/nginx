@@ -8,7 +8,7 @@ pipeline {
         }
         stage('RUN NGINX') {
             steps {
-                sh 'sudo docker build -t newimage /var/lib/jenkins/workspace/CICD'
+                sh 'sudo docker build -t mynginx_image1 /var/lib/jenkins/workspace/CICD'
                 sh 'sudo docker run --name mynginx3 -p 80:80 -d mynginx_image1:${BUILD_NUMBER}'
 
             }
