@@ -8,8 +8,8 @@ pipeline {
         }
         stage('RUN NGINX') {
             steps {
-                sh 'sudo docker build -t mynginx_image1 /var/lib/jenkins/workspace/CICD'
-                sh 'sudo docker run --name mynginx3 -p 80:80 -d mynginx_image1:${BUILD_NUMBER}'
+                sh 'sudo docker build -t vinayak . /var/lib/jenkins/workspace/CICD'
+                sh 'sudo docker run -itd --name vinimage -p "80:80" vinayak:${BUILD_NUMBER}'
 
             }
         }      
