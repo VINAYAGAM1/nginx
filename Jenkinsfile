@@ -3,27 +3,15 @@ pipeline {
     stages {
         stage('Pull Code From GitHub') {
             steps {
-                git 'https://github.com/Iam-mithran/kuber.git'
+                git 'https://github.com/VINAYAGAM1/meenaproject.git'
             }
         }
-        stage('Build the Docker image') {
+        stage('RUN NGINX') {
             steps {
-                sh 'sudo docker build -t newimage /var/lib/jenkins/workspace/kuber'
-                sh 'sudo docker tag newimage iammithran/newimage:latest'
-                sh 'sudo docker tag newimage iammithran/newimage:${BUILD_NUMBER}'
+                sh 'sudo docker build -t newimage /var/lib/jenkins/workspace/CICD'
+                sh 'sudo docker run --name mynginx3 -p 80:80 -d mynginx_image1:${BUILD_NUMBER}'
+
             }
-        }
-        stage('Push the Docker image') {
-            steps {
-                sh 'sudo docker image push iammithran/newimage:latest'
-                sh 'sudo docker image push iammithran/newimage:${BUILD_NUMBER}'
-            }
-        }
-        stage('Deploy on Kubernetes') {
-            steps {
-                sh 'kubectl apply -f /var/lib/jenkins/workspace/kuber/pod.yaml'
-                sh 'kubectl rollout restart deployment loadbalancer-pod'
-            }
-        }
+        }      
     }
 }
