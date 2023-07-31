@@ -1,5 +1,5 @@
 FROM nginx
-RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
-WORKDIR /CICD
+MAINTAINER vinayak
 COPY ./index.html /usr/share/nginx/html
-COPY conf /etc/nginx
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
